@@ -69,7 +69,7 @@ export default function ReliabilityAnalysis() {
                   <div>
                     <h3 className="text-lg font-semibold">Análise Concluída</h3>
                     <p className="text-muted-foreground">
-                      {currentAnalysis.formData.installation} - {currentAnalysis.formData.equipmentTag}
+                      {currentAnalysis.formData.localPrincipal} - {currentAnalysis.formData.tagPI}
                     </p>
                   </div>
                 </div>

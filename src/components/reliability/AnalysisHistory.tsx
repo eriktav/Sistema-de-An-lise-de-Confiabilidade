@@ -37,11 +37,11 @@ export function AnalysisHistory({ analyses, onViewResult }: AnalysisHistoryProps
                   </div>
                   <div className="flex items-center gap-1">
                     <Building className="h-4 w-4 text-muted-foreground" />
-                    <span>{analysis.formData.installation}</span>
+                    <span>{analysis.formData.localPrincipal}</span>
                   </div>
                   <div className="flex items-center gap-1">
                     <Tag className="h-4 w-4 text-muted-foreground" />
-                    <span className="font-medium">{analysis.formData.equipmentTag}</span>
+                    <span className="font-medium">{analysis.formData.tagPI}</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
@@ -52,7 +52,7 @@ export function AnalysisHistory({ analyses, onViewResult }: AnalysisHistoryProps
                     {analysis.status === 'completed' ? 'Concluída' : 'Processando'}
                   </Badge>
                   <span className="text-xs text-muted-foreground">
-                    {analysis.formData.startDate} - {analysis.formData.endDate}
+                    {analysis.formData.dataInicial} - {analysis.formData.dataFinal}
                   </span>
                 </div>
               </div>

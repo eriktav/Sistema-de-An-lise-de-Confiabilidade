@@ -1,8 +1,12 @@
 export interface AnalysisFormData {
-  installation: string;
-  equipmentTag: string;
-  startDate: string;
-  endDate: string;
+  localPrincipal: string;
+  tagPI: string;
+  dataInicial: string;
+  dataFinal: string;
+  centroPlanejamento: string;
+  sinal: '<' | '>' | '=';
+  referencia: string;
+  horimetroRef: string;
 }
 
 export interface AnalysisResult {

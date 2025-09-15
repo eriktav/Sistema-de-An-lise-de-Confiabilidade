@@ -19,7 +19,7 @@ export function ReliabilityForm({ onSubmit, isLoading }: ReliabilityFormProps) {
     watch,
   } = useForm<AnalysisFormData>();
 
-  const startDate = watch('startDate');
+  const dataInicial = watch('dataInicial');
 
   return (
     <Card className="w-full max-w-2xl mx-auto backdrop-blur-glass bg-card/80 border border-white/10 shadow-2xl">
@@ -31,61 +31,119 @@ export function ReliabilityForm({ onSubmit, isLoading }: ReliabilityFormProps) {
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
-            <Label htmlFor="installation">Instalação *</Label>
+            <Label htmlFor="localPrincipal">Local Principal *</Label>
             <Input
-              id="installation"
-              {...register('installation', { required: 'Instalação é obrigatória' })}
+              id="localPrincipal"
+              {...register('localPrincipal', { required: 'Local Principal é obrigatório' })}
               className="bg-background/50 border-white/20 focus:border-primary"
               placeholder="Ex: Refinaria Norte"
             />
-            {errors.installation && (
-              <p className="text-sm text-destructive">{errors.installation.message}</p>
+            {errors.localPrincipal && (
+              <p className="text-sm text-destructive">{errors.localPrincipal.message}</p>
             )}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="equipmentTag">Tag do Equipamento *</Label>
+            <Label htmlFor="tagPI">TAG PI *</Label>
             <Input
-              id="equipmentTag"
-              {...register('equipmentTag', { required: 'Tag do equipamento é obrigatória' })}
+              id="tagPI"
+              {...register('tagPI', { required: 'TAG PI é obrigatória' })}
               className="bg-background/50 border-white/20 focus:border-primary"
               placeholder="Ex: P-101A"
             />
-            {errors.equipmentTag && (
-              <p className="text-sm text-destructive">{errors.equipmentTag.message}</p>
+            {errors.tagPI && (
+              <p className="text-sm text-destructive">{errors.tagPI.message}</p>
             )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="startDate">Data de Início *</Label>
+              <Label htmlFor="dataInicial">Data Inicial (dd/mm/aaaa) *</Label>
               <Input
-                id="startDate"
+                id="dataInicial"
                 type="date"
-                {...register('startDate', { required: 'Data de início é obrigatória' })}
+                {...register('dataInicial', { required: 'Data inicial é obrigatória' })}
                 className="bg-background/50 border-white/20 focus:border-primary"
               />
-              {errors.startDate && (
-                <p className="text-sm text-destructive">{errors.startDate.message}</p>
+              {errors.dataInicial && (
+                <p className="text-sm text-destructive">{errors.dataInicial.message}</p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="endDate">Data de Fim *</Label>
+              <Label htmlFor="dataFinal">Data Final (dd/mm/aaaa) *</Label>
               <Input
-                id="endDate"
+                id="dataFinal"
                 type="date"
-                {...register('endDate', {
-                  required: 'Data de fim é obrigatória',
+                {...register('dataFinal', {
+                  required: 'Data final é obrigatória',
                   validate: (value) =>
-                    !startDate || value > startDate || 'Data de fim deve ser posterior à data de início',
+                    !watch('dataInicial') || value > watch('dataInicial') || 'Data final deve ser posterior à data inicial',
                 })}
                 className="bg-background/50 border-white/20 focus:border-primary"
               />
-              {errors.endDate && (
-                <p className="text-sm text-destructive">{errors.endDate.message}</p>
+              {errors.dataFinal && (
+                <p className="text-sm text-destructive">{errors.dataFinal.message}</p>
               )}
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="centroPlanejamento">Centro de Planejamento *</Label>
+            <Input
+              id="centroPlanejamento"
+              {...register('centroPlanejamento', { required: 'Centro de Planejamento é obrigatório' })}
+              className="bg-background/50 border-white/20 focus:border-primary"
+              placeholder="Ex: CP-001"
+            />
+            {errors.centroPlanejamento && (
+              <p className="text-sm text-destructive">{errors.centroPlanejamento.message}</p>
+            )}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="sinal">Sinal *</Label>
+              <select
+                id="sinal"
+                {...register('sinal', { required: 'Sinal é obrigatório' })}
+                className="flex h-10 w-full rounded-md border border-input bg-background/50 border-white/20 focus:border-primary px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="">Selecione o sinal</option>
+                <option value="<">{'<'}</option>
+                <option value=">">{'>'}</option>
+                <option value="=">=</option>
+              </select>
+              {errors.sinal && (
+                <p className="text-sm text-destructive">{errors.sinal.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="referencia">Referência *</Label>
+              <Input
+                id="referencia"
+                {...register('referencia', { required: 'Referência é obrigatória' })}
+                className="bg-background/50 border-white/20 focus:border-primary"
+                placeholder="Ex: REF-001"
+              />
+              {errors.referencia && (
+                <p className="text-sm text-destructive">{errors.referencia.message}</p>
+              )}
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="horimetroRef">Horímetro de Ref. *</Label>
+            <Input
+              id="horimetroRef"
+              {...register('horimetroRef', { required: 'Horímetro de Ref. é obrigatório' })}
+              className="bg-background/50 border-white/20 focus:border-primary"
+              placeholder="Ex: 1234.5"
+            />
+            {errors.horimetroRef && (
+              <p className="text-sm text-destructive">{errors.horimetroRef.message}</p>
+            )}
           </div>
 
           <Button
